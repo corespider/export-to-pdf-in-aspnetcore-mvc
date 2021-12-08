@@ -1,0 +1,50 @@
+﻿@using Export_to_PDF_ASPNetCoreMVC.Models;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">  
+     <div class="col-md-12">  
+       <div id="PrintPDF">  
+         <div class="container">  
+           <table class="table table-borderd">  
+             <thead>  
+               <tr>  
+                <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Street</th>
+            <th>City</th>
+               </tr>  
+             </thead>  
+             <tbody>  
+               @foreach (Customer customer in Model)  
+               {  
+               <tr>
+                <td>@customer.first_name</td>
+                <td>@customer.last_name</td>
+                <td>@customer.email</td>
+                <td>@customer.street</td>
+                <td>@customer.city</td>
+            </tr> 
+               }  
+             </tbody>  
+           </table>  
+         </div>  
+         </div>  
+         <form method="post" asp-controller="Home" asp-action="ExportExcel">
+                <input type="hidden" name="ExportData" id="ExportData" />  
+                <input type="submit" id="btnSubmit" value="Export" class="btn btn-primary" />
+         </form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+       <script type="text/javascript">  
+         $(function () {  
+           $("#btnSubmit").click(function () {  
+             $("input[name='ExportData']").val($("#PrintPDF").html());  
+           });  
+         });  
+       </script>  
+     </div>  
+   </div> 
